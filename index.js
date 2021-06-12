@@ -1,12 +1,18 @@
-// import books from 'google-books-search';
+import books from 'google-books-search';
 
-var myArgs = process.argv.slice(2);
+let myArgs = process.argv.slice(2);
 console.log('myArgs: ', myArgs);
 
-// books.search(search, function(error, results) {
-//   if ( ! error ) {
-//       console.log(results);
-//   } else {
-//       console.log(error);
-//   }
-// });
+let query = "";
+
+for(let i = 0; i < myArgs.length; i++){
+  query += myArgs[i] + " ";
+}
+
+books.search(query, function(error, results) {
+  if ( ! error ) {
+      console.log(results);
+  } else {
+      console.log(error);
+  }
+});
