@@ -1,1 +1,1 @@
-const key = 000;
+console.log("hello world")
