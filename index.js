@@ -1,5 +1,7 @@
 import books from 'google-books-search';
 
+
+
 let myArgs = process.argv.slice(2);
 console.log('myArgs: ', myArgs);
 
@@ -46,6 +48,19 @@ class BookList {
     }
     return current;
   }
+  print(){
+    let current = this.head;
+    let counter = 1;
+    while(counter < 6){
+      console.log("Book " + counter + " -----------------");
+      console.log("Title: " + current.title);
+      console.log("Authors: " + current.authors);
+      console.log("Publisher: " + current.publisher);
+      console.log(" ");
+      current = current.next;
+      counter++;
+    }
+  }
 }
 
 let querySearchResults = new BookList();
@@ -53,10 +68,10 @@ let readingList = new BookList();
 
 books.search(query, function(error, results) {
   if ( ! error ) {
-        for(let i = 0; i < 5; i++){
+      for(let i = 0; i < 5; i++){
           querySearchResults.push(results[i].title, results[i].authors, results[i].publisher)
       }
-      console.log(querySearchResults);
+      querySearchResults.print();
   } else {
       console.log(error);
   }
