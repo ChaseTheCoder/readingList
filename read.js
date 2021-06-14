@@ -70,32 +70,10 @@ function bookQuery(query) {
   });
 }
 
-'use strict';
+console.log('       ')
+console.log('       ')
 console.log('Hello, search books via Google and add them to a Reading List.');
-
-const question1 = [
-  {
-    type: 'input',
-    name: 'bookSearch',
-    message: 'Search book: ',
-  },
-];
-const question2 = [
-  {
-    type: 'list',
-    name: 'chooseBook',
-    message: 'Which book do you want to add to your reading list? Enter the number: ',
-    choices: [1,2,3,4,5]
-  }
-];
-const question3 = [
-  {
-    type: 'confirm',
-    name: 'askAgain',
-    message: 'Hit enter to search again.',
-  }
-];
-
+console.log('       ')
 const readlineInterface = readline.createInterface({
   input: process.stdin,
   output: process.stdout
@@ -108,11 +86,11 @@ function ask(questionText) {
 }
 
 async function start() {
-  let queryKeyWords = await ask("Search Books: ")
+  let queryKeyWords = await ask('Search Books: ')
   bookQuery(queryKeyWords) //need to make synchornous
-  let num = await ask("number 1-5: ")
+  let num = await ask('number 1-5: ')
   querySearchResults.get(num)
-  console.log("Done")
+  console.log('Done')
   process.exit() 
 }
 
