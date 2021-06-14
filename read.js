@@ -1,5 +1,5 @@
 import books from 'google-books-search';
-import inquirer from 'inquirer';
+import readline from 'readline';
 
 class Book {
   constructor(title, authors, publisher){
@@ -29,13 +29,14 @@ class BookList {
     return this; 
   }
   get(index){
-    if(index < 0 || index >= this.length) return null
-    let counter = 0;
+    if(index < 1 || index >= this.length) return null;
+    let counter = 1;
     let current = this.head;
     while(counter !== index){
       current = current.next;
       counter++;
     }
+    console.log(current);
     return current;
   }
   print(){
@@ -95,40 +96,24 @@ const question3 = [
   }
 ];
 
-function ask() {
-  inquirer
-  .prompt(
-    question1
-  )
-  .then((answer1) => {
-    bookQuery(answer1.bookSearch);
-  })
-  .catch((error) => {
-    if (error.isTtyError) {
-      console.log(error.isTtyError)
-      // Prompt couldn't be rendered in the current environment
-    } else {
-      querySearchResults.print();
-    }
-  });
-}  
+const readlineInterface = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-// function selectBook() {
-//   inquirer
-//   .prompt(question2)
-//   .then((answer2) => {
-//     let selection = querySearchResults.get(answer2)
-//     console.log(selection);
-//   })
-//   .catch((error) => {
-//     if (error.isTtyError) {
-//       console.log(error.isTtyError)
-//       // Prompt couldn't be rendered in the current environment
-//     } else {
-//       console.log("Good!");
-//     }
-//   });
-// }
+function ask(questionText) {
+  return new Promise((resolve, reject) => {
+  readlineInterface.question(questionText, (input) => resolve(input) );
+});
+}
 
+async function start() {
+  let queryKeyWords = await ask("Search Books: ")
+  bookQuery(queryKeyWords) //need to make synchornous
+  let num = await ask("number 1-5: ")
+  querySearchResults.get(num)
+  console.log("Done")
+  process.exit() 
+}
 
-ask();
+start();

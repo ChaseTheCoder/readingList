@@ -21,6 +21,7 @@
     "@googleapis/books": "^0.2.0",
     "google-books-search": "^0.3.1",
     "googleapis": "^76.0.0",
-    "inquirer": "^8.1.0"
+    "inquirer": "^8.1.0",
+    "readline-sync": "^1.4.10"
   }
 }
